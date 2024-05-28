@@ -1,0 +1,19 @@
+services:
+  mockserver:
+    image: mockserver/mockserver
+    container_name:  mockserver
+    ports:
+      - 8080:80
+    command: -logLevel DEBUG -serverPort 80
+    environment:
+      MOCKSERVER_PROPERTY_FILE: /config/mockserver.properties
+      MOCKSERVER_INITIALIZATION_JSON_PATH: /config/initializerJson.json
+    volumes:
+      - "./config:/config"
+    networks:
+      - mockserver-network
+
+networks:
+  mockserver-network:
+    name: mockserver-net
+    external: true
